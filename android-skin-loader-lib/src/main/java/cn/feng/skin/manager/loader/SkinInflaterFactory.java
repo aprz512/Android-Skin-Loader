@@ -94,6 +94,14 @@ public class SkinInflaterFactory implements Factory {
         List<SkinAttr> viewAttrs = new ArrayList<>();
 
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
+
+            /**
+             * get 出来的是这样的东西：
+             * attrName = divider, attrValue = @2131099656
+             * attrName = textColor, attrValue = @2131099660
+             * attrName = background, attrValue = @2131099658
+             */
+
             String attrName = attrs.getAttributeName(i);
             String attrValue = attrs.getAttributeValue(i);
 
@@ -103,11 +111,15 @@ public class SkinInflaterFactory implements Factory {
 
             // parse id
             // @+id 的怎么处理的，异常处理了？
+            // xml 编译之后 id 值是 @ + 数值的形式
             if (attrValue.startsWith("@")) {
                 try {
                     int id = Integer.parseInt(attrValue.substring(1));
                     String entryName = context.getResources().getResourceEntryName(id);
                     String typeName = context.getResources().getResourceTypeName(id);
+
+                    L.e("aprz", "entryName = " + entryName + ", typeName = " + typeName);
+
                     SkinAttr mSkinAttr = AttrFactory.get(attrName, id, entryName, typeName);
                     if (mSkinAttr != null) {
                         viewAttrs.add(mSkinAttr);

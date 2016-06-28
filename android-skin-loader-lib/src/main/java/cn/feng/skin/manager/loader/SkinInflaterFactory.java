@@ -20,19 +20,17 @@ import cn.feng.skin.manager.util.ListUtils;
 
 /**
  * Supply {@link SkinInflaterFactory} to be called when inflating from a LayoutInflater.
- * <p>
+ * <p/>
  * <p>Use this to collect the {skin:enable="true|false"} views availabled in our XML layout files.
  *
  * @author fengjun
  */
 public class SkinInflaterFactory implements Factory {
 
-    private static final boolean DEBUG = true;
-
     /**
      * Store the view item that need skin changing in the activity
      */
-    private List<SkinItem> mSkinItems = new ArrayList<SkinItem>();
+    private List<SkinItem> mSkinItems = new ArrayList<>();
 
     @Override
     public View onCreateView(String name, Context context, AttributeSet attrs) {
@@ -58,7 +56,7 @@ public class SkinInflaterFactory implements Factory {
      * instantiate a view class of the given <var>name</var> found in this
      * LayoutInflater's ClassLoader.
      *
-     * @param context
+     * @param context context
      * @param name    The full name of the class to be instantiated.
      * @param attrs   The XML attributes supplied for this instance.
      * @return View The newly instantiated view, or null.
@@ -91,13 +89,9 @@ public class SkinInflaterFactory implements Factory {
 
     /**
      * Collect skin able tag such as background , textColor and so on
-     *
-     * @param context
-     * @param attrs
-     * @param view
      */
     private void parseSkinAttr(Context context, AttributeSet attrs, View view) {
-        List<SkinAttr> viewAttrs = new ArrayList<SkinAttr>();
+        List<SkinAttr> viewAttrs = new ArrayList<>();
 
         for (int i = 0; i < attrs.getAttributeCount(); i++) {
             String attrName = attrs.getAttributeName(i);
@@ -107,6 +101,8 @@ public class SkinInflaterFactory implements Factory {
                 continue;
             }
 
+            // parse id
+            // @+id 的怎么处理的，异常处理了？
             if (attrValue.startsWith("@")) {
                 try {
                     int id = Integer.parseInt(attrValue.substring(1));
@@ -116,12 +112,12 @@ public class SkinInflaterFactory implements Factory {
                     if (mSkinAttr != null) {
                         viewAttrs.add(mSkinAttr);
                     }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                } catch (NotFoundException e) {
+                } catch (NumberFormatException | NotFoundException e) {
                     e.printStackTrace();
                 }
             }
+
+            L.e("aprz", "attrName = " + attrName + ", attrValue = " + attrValue);
         }
 
         if (!ListUtils.isEmpty(viewAttrs)) {
@@ -151,7 +147,7 @@ public class SkinInflaterFactory implements Factory {
     }
 
     public void dynamicAddSkinEnableView(Context context, View view, List<DynamicAttr> pDAttrs) {
-        List<SkinAttr> viewAttrs = new ArrayList<SkinAttr>();
+        List<SkinAttr> viewAttrs = new ArrayList<>();
         SkinItem skinItem = new SkinItem();
         skinItem.view = view;
 
@@ -168,13 +164,12 @@ public class SkinInflaterFactory implements Factory {
     }
 
     public void dynamicAddSkinEnableView(Context context, View view, String attrName, int attrValueResId) {
-        int id = attrValueResId;
-        String entryName = context.getResources().getResourceEntryName(id);
-        String typeName = context.getResources().getResourceTypeName(id);
-        SkinAttr mSkinAttr = AttrFactory.get(attrName, id, entryName, typeName);
+        String entryName = context.getResources().getResourceEntryName(attrValueResId);
+        String typeName = context.getResources().getResourceTypeName(attrValueResId);
+        SkinAttr mSkinAttr = AttrFactory.get(attrName, attrValueResId, entryName, typeName);
         SkinItem skinItem = new SkinItem();
         skinItem.view = view;
-        List<SkinAttr> viewAttrs = new ArrayList<SkinAttr>();
+        List<SkinAttr> viewAttrs = new ArrayList<>();
         viewAttrs.add(mSkinAttr);
         skinItem.attrs = viewAttrs;
         addSkinView(skinItem);

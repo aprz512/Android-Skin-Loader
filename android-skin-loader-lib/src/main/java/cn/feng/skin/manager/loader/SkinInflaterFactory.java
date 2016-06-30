@@ -20,7 +20,7 @@ import cn.feng.skin.manager.util.ListUtils;
 
 /**
  * Supply {@link SkinInflaterFactory} to be called when inflating from a LayoutInflater.
- * <p/>
+ * <p>
  * <p>Use this to collect the {skin:enable="true|false"} views availabled in our XML layout files.
  *
  * @author fengjun
@@ -115,6 +115,13 @@ public class SkinInflaterFactory implements Factory {
             if (attrValue.startsWith("@")) {
                 try {
                     int id = Integer.parseInt(attrValue.substring(1));
+
+                    /**
+                     * get 出来的是这样的：
+                     * entryName                        typeName
+                     * news_item_text_color_selector    color
+                     * news_item_selector               drawable
+                     */
                     String entryName = context.getResources().getResourceEntryName(id);
                     String typeName = context.getResources().getResourceTypeName(id);
 

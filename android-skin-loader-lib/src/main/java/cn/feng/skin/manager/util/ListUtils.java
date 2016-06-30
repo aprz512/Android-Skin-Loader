@@ -1,18 +1,20 @@
 package cn.feng.skin.manager.util;
 
+import android.text.TextUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import android.text.TextUtils;
-
 /**
  * List Utils
- * 
+ *
  * @author fengjun
  */
 public class ListUtils {
 
-    /** default join separator **/
+    /**
+     * default join separator
+     **/
     public static final String DEFAULT_JOIN_SEPARATOR = ",";
 
     private ListUtils() {
@@ -21,13 +23,13 @@ public class ListUtils {
 
     /**
      * get size of list
-     * 
+     * <p>
      * <pre>
      * getSize(null)   =   0;
      * getSize({})     =   0;
      * getSize({1})    =   1;
      * </pre>
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @return if list is null or empty, return 0, else return {@link List#size()}.
@@ -38,13 +40,13 @@ public class ListUtils {
 
     /**
      * is null or its size is 0
-     * 
+     * <p>
      * <pre>
      * isEmpty(null)   =   true;
      * isEmpty({})     =   true;
      * isEmpty({1})    =   false;
      * </pre>
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @return if list is null or its size is 0, return true, else return false.
@@ -55,14 +57,14 @@ public class ListUtils {
 
     /**
      * compare two list
-     * 
+     * <p>
      * <pre>
      * isEquals(null, null) = true;
      * isEquals(new ArrayList&lt;String&gt;(), null) = false;
      * isEquals(null, new ArrayList&lt;String&gt;()) = false;
      * isEquals(new ArrayList&lt;String&gt;(), new ArrayList&lt;String&gt;()) = true;
      * </pre>
-     * 
+     *
      * @param <V>
      * @param actual
      * @param expected
@@ -89,13 +91,13 @@ public class ListUtils {
 
     /**
      * join list to string, separator is ","
-     * 
+     * <p>
      * <pre>
      * join(null)      =   "";
      * join({})        =   "";
      * join({a,b})     =   "a,b";
      * </pre>
-     * 
+     *
      * @param list
      * @return join list to string, separator is ",". if list is empty, return ""
      */
@@ -105,25 +107,25 @@ public class ListUtils {
 
     /**
      * join list to string
-     * 
+     * <p>
      * <pre>
      * join(null, '#')     =   "";
      * join({}, '#')       =   "";
      * join({a,b,c}, ' ')  =   "abc";
      * join({a,b,c}, '#')  =   "a#b#c";
      * </pre>
-     * 
+     *
      * @param list
      * @param separator
      * @return join list to string. if list is empty, return ""
      */
     public static String join(List<String> list, char separator) {
-        return join(list, new String(new char[] {separator}));
+        return join(list, new String(new char[]{separator}));
     }
 
     /**
      * join list to string. if separator is null, use {@link #DEFAULT_JOIN_SEPARATOR}
-     * 
+     * <p>
      * <pre>
      * join(null, "#")     =   "";
      * join({}, "#$")      =   "";
@@ -132,7 +134,7 @@ public class ListUtils {
      * join({a,b,c}, "#")  =   "a#b#c";
      * join({a,b,c}, "#$") =   "a#$b#$c";
      * </pre>
-     * 
+     *
      * @param list
      * @param separator
      * @return join list to string with separator. if list is empty, return ""
@@ -143,7 +145,7 @@ public class ListUtils {
 
     /**
      * add distinct entry to list
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @param entry
@@ -155,7 +157,7 @@ public class ListUtils {
 
     /**
      * add all distinct entry to list1 from list2
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @param entryList
@@ -177,7 +179,7 @@ public class ListUtils {
 
     /**
      * remove duplicate entries in list
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @return the count of entries be removed
@@ -203,14 +205,14 @@ public class ListUtils {
 
     /**
      * add not null entry to list
-     * 
+     *
      * @param sourceList
      * @param value
      * @return <ul>
-     *         <li>if sourceList is null, return false</li>
-     *         <li>if value is null, return false</li>
-     *         <li>return {@link List#add(Object)}</li>
-     *         </ul>
+     * <li>if sourceList is null, return false</li>
+     * <li>if value is null, return false</li>
+     * <li>return {@link List#add(Object)}</li>
+     * </ul>
      */
     public static <V> boolean addListNotNullValue(List<V> sourceList, V value) {
         return (sourceList != null && value != null) ? sourceList.add(value) : false;
@@ -221,7 +223,7 @@ public class ListUtils {
      */
     @SuppressWarnings("unchecked")
     public static <V> V getLast(List<V> sourceList, V value) {
-        return (sourceList == null) ? null : (V)ArrayUtils.getLast(sourceList.toArray(), value, true);
+        return (sourceList == null) ? null : (V) ArrayUtils.getLast(sourceList.toArray(), value, true);
     }
 
     /**
@@ -229,12 +231,12 @@ public class ListUtils {
      */
     @SuppressWarnings("unchecked")
     public static <V> V getNext(List<V> sourceList, V value) {
-        return (sourceList == null) ? null : (V)ArrayUtils.getNext(sourceList.toArray(), value, true);
+        return (sourceList == null) ? null : (V) ArrayUtils.getNext(sourceList.toArray(), value, true);
     }
 
     /**
      * invert list
-     * 
+     *
      * @param <V>
      * @param sourceList
      * @return

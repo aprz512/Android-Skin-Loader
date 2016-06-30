@@ -15,7 +15,7 @@ package cn.feng.skin.manager.util;
  * <li>{@link #getNext(int[], int, int, boolean)}</li>
  * <li>{@link #getNext(long[], long, long, boolean)}</li>
  * </ul>
- * 
+ *
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2011-10-24
  */
 public class ArrayUtils {
@@ -26,7 +26,7 @@ public class ArrayUtils {
 
     /**
      * is null or its length is 0
-     * 
+     *
      * @param <V>
      * @param sourceArray
      * @return
@@ -44,12 +44,12 @@ public class ArrayUtils {
      * <li>if target element exist in array and its index is 0, return the last one in array if isCircle is true, else
      * return defaultValue</li>
      * </ul>
-     * 
+     *
      * @param <V>
      * @param sourceArray
-     * @param value value of target element
+     * @param value        value of target element
      * @param defaultValue default return value
-     * @param isCircle whether is circle
+     * @param isCircle     whether is circle
      * @return
      */
     public static <V> V getLast(V[] sourceArray, V value, V defaultValue, boolean isCircle) {
@@ -83,12 +83,12 @@ public class ArrayUtils {
      * <li>if target element exist in array and the last one in array, return the first one in array if isCircle is
      * true, else return defaultValue</li>
      * </ul>
-     * 
+     *
      * @param <V>
      * @param sourceArray
-     * @param value value of target element
+     * @param value        value of target element
      * @param defaultValue default return value
-     * @param isCircle whether is circle
+     * @param isCircle     whether is circle
      * @return
      */
     public static <V> V getNext(V[] sourceArray, V value, V defaultValue, boolean isCircle) {

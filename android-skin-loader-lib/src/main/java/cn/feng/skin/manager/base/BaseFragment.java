@@ -11,32 +11,32 @@ import java.util.List;
 import cn.feng.skin.manager.entity.DynamicAttr;
 import cn.feng.skin.manager.listener.IDynamicNewView;
 
-public class BaseFragment extends Fragment implements IDynamicNewView{
-	
-	private IDynamicNewView mIDynamicNewView;
-	private LayoutInflater mLayoutInflater;
+public class BaseFragment extends Fragment implements IDynamicNewView {
 
-	@Override
-	public void onAttach(Context context) {
-		super.onAttach(context);
-		try{
-			mIDynamicNewView = (IDynamicNewView)context;
-		}catch(ClassCastException e){
-			mIDynamicNewView = null;
-		}
-	}
+    private IDynamicNewView mIDynamicNewView;
+    private LayoutInflater mLayoutInflater;
 
-	@Override
-	public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
-		if(mIDynamicNewView == null){
-			throw new RuntimeException("IDynamicNewView should be implements !");
-		}else{
-			mIDynamicNewView.dynamicAddView(view, pDAttrs);
-		}
-	}
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mIDynamicNewView = (IDynamicNewView) context;
+        } catch (ClassCastException e) {
+            mIDynamicNewView = null;
+        }
+    }
 
-	public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
-		LayoutInflater result = getActivity().getLayoutInflater();
-		return result;
-	}
+    @Override
+    public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
+        if (mIDynamicNewView == null) {
+            throw new RuntimeException("IDynamicNewView should be implements !");
+        } else {
+            mIDynamicNewView.dynamicAddView(view, pDAttrs);
+        }
+    }
+
+    public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
+        LayoutInflater result = getActivity().getLayoutInflater();
+        return result;
+    }
 }

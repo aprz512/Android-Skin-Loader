@@ -7,28 +7,33 @@ import java.util.Map.Entry;
 
 /**
  * Map Utils
- * 
+ *
  * @author <a href="http://www.trinea.cn" target="_blank">Trinea</a> 2011-7-22
  */
 public class MapUtils {
 
-    /** default separator between key and value **/
-    public static final String DEFAULT_KEY_AND_VALUE_SEPARATOR      = ":";
-    /** default separator between key-value pairs **/
+    /**
+     * default separator between key and value
+     **/
+    public static final String DEFAULT_KEY_AND_VALUE_SEPARATOR = ":";
+    /**
+     * default separator between key-value pairs
+     **/
     public static final String DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR = ",";
-    
+
     private MapUtils() {
         throw new AssertionError();
     }
+
     /**
      * is null or its size is 0
-     * 
+     * <p>
      * <pre>
      * isEmpty(null)   =   true;
      * isEmpty({})     =   true;
      * isEmpty({1, 2})    =   false;
      * </pre>
-     * 
+     *
      * @param sourceMap
      * @return if map is null or its size is 0, return true, else return false.
      */
@@ -38,15 +43,15 @@ public class MapUtils {
 
     /**
      * add key-value pair to map, and key need not null or empty
-     * 
+     *
      * @param map
      * @param key
      * @param value
      * @return <ul>
-     *         <li>if map is null, return false</li>
-     *         <li>if key is null or empty, return false</li>
-     *         <li>return {@link Map#put(Object, Object)}</li>
-     *         </ul>
+     * <li>if map is null, return false</li>
+     * <li>if key is null or empty, return false</li>
+     * <li>return {@link Map#put(Object, Object)}</li>
+     * </ul>
      */
     public static boolean putMapNotEmptyKey(Map<String, String> map, String key, String value) {
         if (map == null || StringUtils.isEmpty(key)) {
@@ -59,16 +64,16 @@ public class MapUtils {
 
     /**
      * add key-value pair to map, both key and value need not null or empty
-     * 
+     *
      * @param map
      * @param key
      * @param value
      * @return <ul>
-     *         <li>if map is null, return false</li>
-     *         <li>if key is null or empty, return false</li>
-     *         <li>if value is null or empty, return false</li>
-     *         <li>return {@link Map#put(Object, Object)}</li>
-     *         </ul>
+     * <li>if map is null, return false</li>
+     * <li>if key is null or empty, return false</li>
+     * <li>if value is null or empty, return false</li>
+     * <li>return {@link Map#put(Object, Object)}</li>
+     * </ul>
      */
     public static boolean putMapNotEmptyKeyAndValue(Map<String, String> map, String key, String value) {
         if (map == null || StringUtils.isEmpty(key) || StringUtils.isEmpty(value)) {
@@ -81,20 +86,20 @@ public class MapUtils {
 
     /**
      * add key-value pair to map, key need not null or empty
-     * 
+     *
      * @param map
      * @param key
      * @param value
      * @param defaultValue
      * @return <ul>
-     *         <li>if map is null, return false</li>
-     *         <li>if key is null or empty, return false</li>
-     *         <li>if value is null or empty, put defaultValue, return true</li>
-     *         <li>if value is neither null nor empty，put value, return true</li>
-     *         </ul>
+     * <li>if map is null, return false</li>
+     * <li>if key is null or empty, return false</li>
+     * <li>if value is null or empty, put defaultValue, return true</li>
+     * <li>if value is neither null nor empty，put value, return true</li>
+     * </ul>
      */
     public static boolean putMapNotEmptyKeyAndValue(Map<String, String> map, String key, String value,
-            String defaultValue) {
+                                                    String defaultValue) {
         if (map == null || StringUtils.isEmpty(key)) {
             return false;
         }
@@ -105,15 +110,15 @@ public class MapUtils {
 
     /**
      * add key-value pair to map, key need not null
-     * 
+     *
      * @param map
      * @param key
      * @param value
      * @return <ul>
-     *         <li>if map is null, return false</li>
-     *         <li>if key is null, return false</li>
-     *         <li>return {@link Map#put(Object, Object)}</li>
-     *         </ul>
+     * <li>if map is null, return false</li>
+     * <li>if key is null, return false</li>
+     * <li>return {@link Map#put(Object, Object)}</li>
+     * </ul>
      */
     public static <K, V> boolean putMapNotNullKey(Map<K, V> map, K key, V value) {
         if (map == null || key == null) {
@@ -126,16 +131,16 @@ public class MapUtils {
 
     /**
      * add key-value pair to map, both key and value need not null
-     * 
+     *
      * @param map
      * @param key
      * @param value
      * @return <ul>
-     *         <li>if map is null, return false</li>
-     *         <li>if key is null, return false</li>
-     *         <li>if value is null, return false</li>
-     *         <li>return {@link Map#put(Object, Object)}</li>
-     *         </ul>
+     * <li>if map is null, return false</li>
+     * <li>if key is null, return false</li>
+     * <li>if value is null, return false</li>
+     * <li>return {@link Map#put(Object, Object)}</li>
+     * </ul>
      */
     public static <K, V> boolean putMapNotNullKeyAndValue(Map<K, V> map, K key, V value) {
         if (map == null || key == null || value == null) {
@@ -152,15 +157,15 @@ public class MapUtils {
      * <strong>Attentions:</strong>
      * <li>for HashMap, the order of entry not same to put order, so you may need to use TreeMap</li>
      * </ul>
-     * 
+     *
      * @param <V>
      * @param map
      * @param value
      * @return <ul>
-     *         <li>if map is null, return null</li>
-     *         <li>if value exist, return key</li>
-     *         <li>return null</li>
-     *         </ul>
+     * <li>if map is null, return null</li>
+     * <li>if value exist, return key</li>
+     * <li>return null</li>
+     * </ul>
      */
     public static <K, V> K getKeyByValue(Map<K, V> map, V value) {
         if (isEmpty(map)) {
@@ -177,7 +182,7 @@ public class MapUtils {
 
     /**
      * parse key-value pairs to map, ignore empty key
-     * 
+     * <p>
      * <pre>
      * parseKeyAndValueToMap("","","",true)=null
      * parseKeyAndValueToMap(null,"","",true)=null
@@ -190,15 +195,15 @@ public class MapUtils {
      * parseKeyAndValueToMap("a=b; c=d","=", ";", false)={(a,b),( c,d)}
      * parseKeyAndValueToMap("a=b, c=d", ",", ";", false)={(a=b, c=d)}
      * </pre>
-     * 
-     * @param source key-value pairs
-     * @param keyAndValueSeparator separator between key and value
+     *
+     * @param source                   key-value pairs
+     * @param keyAndValueSeparator     separator between key and value
      * @param keyAndValuePairSeparator separator between key-value pairs
-     * @param ignoreSpace whether ignore space at the begging or end of key and value
+     * @param ignoreSpace              whether ignore space at the begging or end of key and value
      * @return
      */
     public static Map<String, String> parseKeyAndValueToMap(String source, String keyAndValueSeparator,
-            String keyAndValuePairSeparator, boolean ignoreSpace) {
+                                                            String keyAndValuePairSeparator, boolean ignoreSpace) {
         if (StringUtils.isEmpty(source)) {
             return null;
         }
@@ -235,13 +240,13 @@ public class MapUtils {
 
     /**
      * parse key-value pairs to map, ignore empty key
-     * 
-     * @param source key-value pairs
+     *
+     * @param source      key-value pairs
      * @param ignoreSpace whether ignore space at the begging or end of key and value
      * @return
      * @see {@link MapUtils#parseKeyAndValueToMap(String, String, String, boolean)}, keyAndValueSeparator is
-     *      {@link #DEFAULT_KEY_AND_VALUE_SEPARATOR}, keyAndValuePairSeparator is
-     *      {@link #DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR}
+     * {@link #DEFAULT_KEY_AND_VALUE_SEPARATOR}, keyAndValuePairSeparator is
+     * {@link #DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR}
      */
     public static Map<String, String> parseKeyAndValueToMap(String source, boolean ignoreSpace) {
         return parseKeyAndValueToMap(source, DEFAULT_KEY_AND_VALUE_SEPARATOR, DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR,
@@ -250,12 +255,12 @@ public class MapUtils {
 
     /**
      * parse key-value pairs to map, ignore empty key, ignore space at the begging or end of key and value
-     * 
+     *
      * @param source key-value pairs
      * @return
      * @see {@link MapUtils#parseKeyAndValueToMap(String, String, String, boolean)}, keyAndValueSeparator is
-     *      {@link #DEFAULT_KEY_AND_VALUE_SEPARATOR}, keyAndValuePairSeparator is
-     *      {@link #DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR}, ignoreSpace is true
+     * {@link #DEFAULT_KEY_AND_VALUE_SEPARATOR}, keyAndValuePairSeparator is
+     * {@link #DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR}, ignoreSpace is true
      */
     public static Map<String, String> parseKeyAndValueToMap(String source) {
         return parseKeyAndValueToMap(source, DEFAULT_KEY_AND_VALUE_SEPARATOR, DEFAULT_KEY_AND_VALUE_PAIR_SEPARATOR,
@@ -264,7 +269,7 @@ public class MapUtils {
 
     /**
      * join map
-     * 
+     *
      * @param map
      * @return
      */
@@ -277,7 +282,7 @@ public class MapUtils {
         paras.append("{");
         Iterator<Map.Entry<String, String>> ite = map.entrySet().iterator();
         while (ite.hasNext()) {
-            Map.Entry<String, String> entry = (Map.Entry<String, String>)ite.next();
+            Map.Entry<String, String> entry = (Map.Entry<String, String>) ite.next();
             paras.append("\"").append(entry.getKey()).append("\":\"").append(entry.getValue()).append("\"");
             if (ite.hasNext()) {
                 paras.append(",");

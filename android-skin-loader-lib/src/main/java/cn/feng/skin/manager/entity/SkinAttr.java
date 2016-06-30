@@ -9,14 +9,14 @@ public abstract class SkinAttr {
 
     /**
      * name of the attr, ex: background or textSize or textColor
-     * <p/>
+     * <p>
      * 属性名 例如：android:textSize="18sp" 的textSize
      */
     public String attrName;
 
     /**
      * id of the attr value refered to, normally is [2130745655]
-     * <p/>
+     * <p>
      * android:textColor="@color/color_new_item_synopsis"
      * color_new_item_synopsis 对应的id
      */
@@ -24,7 +24,7 @@ public abstract class SkinAttr {
 
     /**
      * entry name of the value , such as [app_exit_btn_background]
-     * <p/>
+     * <p>
      * android:textColor="@color/color_new_item_synopsis"
      * color 的名字 --- color_new_item_synopsis
      */
@@ -32,7 +32,7 @@ public abstract class SkinAttr {
 
     /**
      * type of the value , such as color or drawable
-     * <p/>
+     * <p>
      * 资源的类型
      */
     public String attrValueTypeName;

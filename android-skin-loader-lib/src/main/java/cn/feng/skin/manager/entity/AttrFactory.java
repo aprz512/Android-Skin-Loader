@@ -8,6 +8,15 @@ public class AttrFactory {
     public static final String LIST_SELECTOR = "listSelector";
     public static final String DIVIDER = "divider";
 
+    /**
+     * 根据 attrName 来生成具体的 SkinAttr 类型，并初始化
+     *
+     * @param attrName         属性名
+     * @param attrValueRefId   编译后的id
+     * @param attrValueRefName 编译后的资源名
+     * @param typeName         资源类型 color 还是 drawable 等等
+     * @return SkinAttr 的子类
+     */
     public static SkinAttr get(String attrName, int attrValueRefId, String attrValueRefName, String typeName) {
 
         SkinAttr mSkinAttr;

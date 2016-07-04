@@ -11,7 +11,7 @@ import cn.feng.skin.manager.entity.DynamicAttr;
  * 作者：aprz on 2016/7/4.
  * 邮箱：aprz512@163.com
  */
-public interface IFragmentSkinHelper extends ISkinHelper {
+public interface IFragmentSkinHelper {
 
     void onAttach(Context context);
 

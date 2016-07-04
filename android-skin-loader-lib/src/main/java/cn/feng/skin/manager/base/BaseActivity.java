@@ -20,6 +20,7 @@ import cn.feng.skin.manager.loader.SkinManager;
  *
  * @author fengjun
  */
+@Deprecated
 public class BaseActivity extends Activity implements ISkinUpdate, IDynamicNewView {
 
     /**

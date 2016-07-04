@@ -1,7 +1,8 @@
 package cn.feng.skin.manager.base;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import java.util.List;
@@ -12,12 +13,12 @@ import cn.feng.skin.manager.entity.DynamicAttr;
  * 作者：aprz on 2016/7/4.
  * 邮箱：aprz512@163.com
  */
-public class ExampleBaseActivity extends Activity {
+public class ExampleBaseFragmentActivity extends FragmentActivity {
 
-    private IActivitySkinHelper mSkinHelper = new ActivitySkinHelper(this);
+    private IActivitySkinHelper mSkinHelper = new FragmentActivitySkinHelper(this);
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         mSkinHelper.onCreate();

@@ -53,29 +53,16 @@ public class ActivitySkinHelper implements IActivitySkinHelper {
     }
 
     @Override
-    public void onPause() {
-
-    }
-
-    @Override
     public void onDestroy() {
         SkinManager.getInstance().detach(this);
         mSkinInflaterFactory.clean();
     }
 
     @Override
-    public void dynamicAddSkinEnableView(View view, String attrName, int attrValueResId) {
+    public void dynamicAddView(View view, String attrName, int attrValueResId) {
         Activity activity = getActivity();
         if (activity != null) {
             mSkinInflaterFactory.dynamicAddSkinEnableView(activity, view, attrName, attrValueResId);
-        }
-    }
-
-    @Override
-    public void dynamicAddSkinEnableView(View view, List<DynamicAttr> pDAttrs) {
-        Activity activity = getActivity();
-        if (activity != null) {
-            mSkinInflaterFactory.dynamicAddSkinEnableView(activity, view, pDAttrs);
         }
     }
 

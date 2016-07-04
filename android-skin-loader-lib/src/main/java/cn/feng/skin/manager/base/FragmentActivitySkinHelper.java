@@ -11,11 +11,11 @@ import cn.feng.skin.manager.loader.SkinInflaterFactory;
  * 作者：aprz on 2016/7/4.
  * 邮箱：aprz512@163.com
  */
-public class FragmentActivityHelper extends ActivitySkinHelper {
+public class FragmentActivitySkinHelper extends ActivitySkinHelper {
 
     private SkinInflaterFactory mSkinInflaterFactory;
 
-    public FragmentActivityHelper(Activity activity) {
+    public FragmentActivitySkinHelper(Activity activity) {
         super(activity);
     }
 

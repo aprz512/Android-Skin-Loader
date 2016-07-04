@@ -9,30 +9,24 @@ import android.view.View;
 import java.util.List;
 
 import cn.feng.skin.manager.entity.DynamicAttr;
-import cn.feng.skin.manager.listener.IDynamicNewView;
 
-@Deprecated
-public class BaseFragment extends Fragment implements IDynamicNewView {
+/**
+ * 作者：aprz on 2016/7/4.
+ * 邮箱：aprz512@163.com
+ */
+public class ExampleBaseFragment extends Fragment {
 
-    private IDynamicNewView mIDynamicNewView;
+    private IFragmentSkinHelper mFragmentSkinHelper = new FragmentSkinHelper();
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        try {
-            mIDynamicNewView = (IDynamicNewView) context;
-        } catch (ClassCastException e) {
-            mIDynamicNewView = null;
-        }
+
+        mFragmentSkinHelper.onAttach(context);
     }
 
-    @Override
     public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
-        if (mIDynamicNewView == null) {
-            throw new RuntimeException("IDynamicNewView should be implements !");
-        } else {
-            mIDynamicNewView.dynamicAddView(view, pDAttrs);
-        }
+        mFragmentSkinHelper.dynamicAddView(view, pDAttrs);
     }
 
     public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {

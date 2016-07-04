@@ -22,6 +22,7 @@ import cn.feng.skin.manager.loader.SkinManager;
  *
  * @author fengjun
  */
+@Deprecated
 public class BaseFragmentActivity extends FragmentActivity implements ISkinUpdate, IDynamicNewView {
 
     /**

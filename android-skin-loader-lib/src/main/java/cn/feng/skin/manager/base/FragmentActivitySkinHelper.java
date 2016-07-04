@@ -13,8 +13,6 @@ import cn.feng.skin.manager.loader.SkinInflaterFactory;
  */
 public class FragmentActivitySkinHelper extends ActivitySkinHelper {
 
-    private SkinInflaterFactory mSkinInflaterFactory;
-
     public FragmentActivitySkinHelper(Activity activity) {
         super(activity);
     }

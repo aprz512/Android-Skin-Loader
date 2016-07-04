@@ -20,9 +20,9 @@ public class ActivitySkinHelper implements IActivitySkinHelper {
     /**
      * Whether response to skin changing after create
      */
-    private boolean isResponseOnSkinChanging = true;
+    protected boolean isResponseOnSkinChanging = true;
 
-    private SkinInflaterFactory mSkinInflaterFactory;
+    protected SkinInflaterFactory mSkinInflaterFactory;
 
     private WeakReference<Activity> mWeakReference;
 

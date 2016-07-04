@@ -1,9 +1,6 @@
 package cn.feng.skin.manager.base;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
 import android.view.View;
 
 import java.util.List;
@@ -11,13 +8,18 @@ import java.util.List;
 import cn.feng.skin.manager.entity.DynamicAttr;
 import cn.feng.skin.manager.listener.IDynamicNewView;
 
-public class BaseFragment extends Fragment implements IDynamicNewView {
+/**
+ * 作者：aprz on 2016/6/30.
+ * 邮箱：aprz512@163.com
+ * <p>
+ * 简化继承
+ */
+public class FragmentSkinHelper implements IFragmentSkinHelper, IDynamicNewView {
 
     private IDynamicNewView mIDynamicNewView;
 
     @Override
     public void onAttach(Context context) {
-        super.onAttach(context);
         try {
             mIDynamicNewView = (IDynamicNewView) context;
         } catch (ClassCastException e) {
@@ -34,7 +36,4 @@ public class BaseFragment extends Fragment implements IDynamicNewView {
         }
     }
 
-    public LayoutInflater getLayoutInflater(Bundle savedInstanceState) {
-        return getActivity().getLayoutInflater();
-    }
 }

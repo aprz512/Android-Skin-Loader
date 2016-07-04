@@ -1,6 +1,5 @@
 package cn.feng.skin.manager.loader;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -10,6 +9,7 @@ import android.content.res.Resources;
 import android.content.res.Resources.NotFoundException;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -20,15 +20,13 @@ import cn.feng.skin.manager.config.SkinConfig;
 import cn.feng.skin.manager.listener.ILoaderListener;
 import cn.feng.skin.manager.listener.ISkinLoader;
 import cn.feng.skin.manager.listener.ISkinUpdate;
-import cn.feng.skin.manager.util.L;
 
 /**
  * Skin Manager Instance
- * <p>
- * <p>
+ * <p/>
+ * <p/>
  * <ul>
  * <strong>global init skin manager, MUST BE CALLED FIRST ! </strong>
- * <li> {@link #init()} </li>
  * </ul>
  * <ul>
  * <strong>get single runtime instance</strong>
@@ -36,7 +34,6 @@ import cn.feng.skin.manager.util.L;
  * </ul>
  * <ul>
  * <strong>attach a listener (Activity or fragment) to SkinManager</strong>
- * <li> {@link #onAttach(ISkinUpdate observer)} </li>
  * </ul>
  * <ul>
  * <strong>detach a listener (Activity or fragment) to SkinManager</strong>
@@ -63,7 +60,7 @@ public class SkinManager implements ISkinLoader {
     private List<ISkinUpdate> skinObservers;
     private Context context;
     private String skinPackageName;
-    private Resources mResources;
+    private Resources mResources;   // 皮肤包的资源 使用默认皮肤时，与 context.getResource 一样
     private String skinPath;
     private boolean isDefaultSkin = false;
 
@@ -167,6 +164,7 @@ public class SkinManager implements ISkinLoader {
                         PackageInfo mInfo = mPm.getPackageArchiveInfo(skinPkgPath, PackageManager.GET_ACTIVITIES);
                         skinPackageName = mInfo.packageName;
 
+                        // 这里应该是换肤的核心代码了，不同的皮肤包创建不同的 AssetManager
                         AssetManager assetManager = AssetManager.class.newInstance();
                         Method addAssetPath = assetManager.getClass().getMethod("addAssetPath", String.class);
                         addAssetPath.invoke(assetManager, skinPkgPath);
@@ -249,7 +247,6 @@ public class SkinManager implements ISkinLoader {
         return trueColor;
     }
 
-    @SuppressLint("NewApi")
     public Drawable getDrawable(int resId) {
         Drawable originDrawable = context.getResources().getDrawable(resId);
         if (mResources == null || isDefaultSkin) {
@@ -261,8 +258,7 @@ public class SkinManager implements ISkinLoader {
 
         Drawable trueDrawable = null;
         try {
-            L.e("ttgg", "SDK_INT = " + android.os.Build.VERSION.SDK_INT);
-            if (android.os.Build.VERSION.SDK_INT < 22) {
+            if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 trueDrawable = mResources.getDrawable(trueResId);
             } else {
                 trueDrawable = mResources.getDrawable(trueResId, null);
@@ -279,12 +275,11 @@ public class SkinManager implements ISkinLoader {
      * 加载指定资源颜色drawable,转化为ColorStateList，保证selector类型的Color也能被转换。</br>
      * 无皮肤包资源返回默认主题颜色
      *
-     * @param resId
-     * @return
-     * @author pinotao
+     * @param resId resId
+     * @return ColorStateList
      */
+    @SuppressWarnings("deprecation")
     public ColorStateList convertToColorStateList(int resId) {
-        L.e("attr1", "convertToColorStateList");
 
         boolean isExtendSkin = true;
 
@@ -293,37 +288,28 @@ public class SkinManager implements ISkinLoader {
         }
 
         String resName = context.getResources().getResourceEntryName(resId);
-        L.e("attr1", "resName = " + resName);
         if (isExtendSkin) {
-            L.e("attr1", "isExtendSkin");
             int trueResId = mResources.getIdentifier(resName, "color", skinPackageName);
-            L.e("attr1", "trueResId = " + trueResId);
-            ColorStateList trueColorList = null;
-            if (trueResId == 0) { // 如果皮肤包没有复写该资源，但是需要判断是否是ColorStateList
+            ColorStateList trueColorList;
+            if (trueResId == 0) {
                 try {
-                    ColorStateList originColorList = context.getResources().getColorStateList(resId);
-                    return originColorList;
+                    return context.getResources().getColorStateList(resId);
                 } catch (NotFoundException e) {
                     e.printStackTrace();
-                    L.e("resName = " + resName + " NotFoundException : " + e.getMessage());
                 }
             } else {
                 try {
                     trueColorList = mResources.getColorStateList(trueResId);
-                    L.e("attr1", "trueColorList = " + trueColorList);
                     return trueColorList;
                 } catch (NotFoundException e) {
                     e.printStackTrace();
-                    L.w("resName = " + resName + " NotFoundException :" + e.getMessage());
                 }
             }
         } else {
             try {
-                ColorStateList originColorList = context.getResources().getColorStateList(resId);
-                return originColorList;
+                return context.getResources().getColorStateList(resId);
             } catch (NotFoundException e) {
                 e.printStackTrace();
-                L.w("resName = " + resName + " NotFoundException :" + e.getMessage());
             }
 
         }

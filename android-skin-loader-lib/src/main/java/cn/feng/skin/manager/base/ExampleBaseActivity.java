@@ -7,12 +7,13 @@ import android.view.View;
 import java.util.List;
 
 import cn.feng.skin.manager.entity.DynamicAttr;
+import cn.feng.skin.manager.listener.IDynamicNewView;
 
 /**
  * 作者：aprz on 2016/7/4.
  * 邮箱：aprz512@163.com
  */
-public class ExampleBaseActivity extends Activity {
+public class ExampleBaseActivity extends Activity implements IDynamicNewView {
 
     private IActivitySkinHelper mSkinHelper = new ActivitySkinHelper(this);
 
@@ -47,6 +48,7 @@ public class ExampleBaseActivity extends Activity {
         mSkinHelper.enableResponseOnSkinChanging(enable);
     }
 
+    @Override
     public void dynamicAddView(View view, List<DynamicAttr> pDAttrs) {
         mSkinHelper.dynamicAddView(view, pDAttrs);
     }
